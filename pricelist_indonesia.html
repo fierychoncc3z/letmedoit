@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LETMEDOIT — Pricelist IDR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B1218;
+    --panel:#121B24;
+    --line:#223140;
+    --accent:#FF4655;
+    --paper:#ECE8E1;
+    --steel:#7C8A96;
+    --gold:#D4AF37;
+
+    --iron:#7A8388;
+    --bronze:#A5672B;
+    --silver:#C4CDD3;
+    --gold-r:#D4AF37;
+    --plat:#2DD4BF;
+    --diamond:#C084FC;
+    --ascendant:#22C55E;
+    --immortal:#B0294B;
+    --radiant:#F4E7A1;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--ink);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+    color:var(--paper);
+    font-family:'Rajdhani',sans-serif;
+    display:flex;
+    justify-content:center;
+    padding:28px 16px 60px;
+  }
+  .sheet{ width:100%; max-width:520px; }
+
+  /* ---- header / dossier block ---- */
+  .brief{
+    position:relative;
+    overflow:hidden;
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:22px 22px 20px;
+    margin-bottom:14px;
+  }
+  .brief::before{
+    content:"";
+    position:absolute;
+    top:-40px; right:-60px;
+    width:220px; height:140px;
+    background:linear-gradient(135deg, var(--accent), #7A0F1E);
+    transform:rotate(18deg);
+    opacity:0.9;
+  }
+  .brief::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(11,18,24,0) 40%, var(--panel) 100%);
+  }
+  .brief__top{
+    position:relative; z-index:2;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.08em; color:var(--steel);
+    margin-bottom:14px;
+  }
+  .brief__badge{
+    background:var(--accent); color:#160306;
+    font-weight:700; padding:3px 8px;
+    letter-spacing:.06em;
+  }
+  .brief__title{
+    position:relative; z-index:2;
+    margin:0; line-height:.92;
+    font-weight:700; font-size:42px;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+  }
+  .brief__title em{ font-style:normal; color:var(--accent); }
+  .brief__tag{
+    position:relative; z-index:2;
+    margin:4px 0 14px; color:var(--steel);
+    font-size:15px; font-weight:600;
+    text-transform:uppercase; letter-spacing:.04em;
+  }
+  .brief__meta{
+    position:relative; z-index:2;
+    display:flex; gap:10px; align-items:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; color:var(--paper); opacity:.85;
+  }
+  .brief__meta .sep{ color:var(--accent); }
+
+  /* ---- cards ---- */
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    margin-bottom:12px;
+  }
+  .card__head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:11px 16px;
+    border-bottom:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.1em;
+    color:var(--steel); text-transform:uppercase;
+  }
+  .card__head b{ color:var(--paper); }
+  .card__note{ font-size:10px; color:var(--steel); opacity:.8; }
+  .card__body{ padding:6px 16px 4px; }
+
+  .row{
+    display:flex; align-items:center; gap:8px;
+    padding:9px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .row:last-child{ border-bottom:none; }
+  .row__label{
+    font-weight:600; font-size:15px;
+    text-transform:uppercase; letter-spacing:.02em;
+    white-space:nowrap;
+  }
+  .row__dots{
+    flex:1; height:0; align-self:flex-end;
+    margin-bottom:6px;
+    border-bottom:2px dotted var(--line);
+  }
+  .row__price{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700; font-size:14px;
+    color:var(--paper); white-space:nowrap;
+  }
+  .row__price small{ color:var(--steel); font-weight:400; font-size:11px; }
+
+  .rank-dot{
+    width:9px; height:9px; flex-shrink:0;
+    transform:rotate(45deg);
+    background:var(--c);
+  }
+  .range-chip{ display:flex; align-items:center; gap:5px; flex-shrink:0; }
+  .range-chip .rank-dot{ width:7px; height:7px; }
+  .range-line{ width:15px; height:2px; background:var(--g); }
+
+  /* ---- payment chips ---- */
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; padding:12px 16px 16px; }
+  .chip{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.05em;
+    color:var(--paper);
+    border:1px solid var(--line);
+    padding:5px 11px;
+  }
+
+  /* ---- contact / footer ---- */
+  .contact{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    padding:16px 18px;
+  }
+  .contact__row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .contact__label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:.1em; color:var(--steel); text-transform:uppercase;
+  }
+  .contact__handle{
+    font-weight:700; font-size:22px; letter-spacing:.01em;
+  }
+  .contact__cta{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; color:var(--accent); border:1px solid var(--accent);
+    padding:6px 12px; white-space:nowrap;
+  }
+  .contact__note{
+    margin-top:10px; font-size:13px; color:var(--steel);
+  }
+  .contact__note b{ color:var(--gold); font-weight:700; }
+
+  @media (max-width:420px){
+    .brief__title{ font-size:34px; }
+    .row__label{ font-size:13.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="brief">
+    <div class="brief__top">
+      <span>// OPERATOR DOSSIER</span>
+      <span class="brief__badge">IDR EDITION</span>
+    </div>
+    <h1 class="brief__title">LETME<em>DOIT</em></h1>
+    <p class="brief__tag">Rank Boosting &amp; Jasa Gendong</p>
+    <div class="brief__meta">
+      <span>V26 : ACT IV</span><span class="sep">/</span><span>STATUS: TRUSTED 100%</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__head"><b>Rank Boost</b><span class="card__note">per rank</span></div>
+    <div class="card__body">
+      <div class="row"><span class="rank-dot" style="--c:var(--iron)"></span><span class="row__label">Iron</span><span class="row__dots"></span><span class="row__price">5.000</span></div>
+      <div class="row"><span class="rank-dot" style="--c:var(--bronze)"></span><span class="row__label">Bronze</span><span class="row__dots"></span><span class="row__price">15.000</span></div>
+      <div class="row"><span class="rank-dot" style="--c:var(--silver)"></span><span class="row__label">Silver</span><span class="row__dots"></span><span class="row__price">25.000</span></div>
+      <div class="row"><span class="rank-dot" style="--c:var(--gold-r)"></span><span class="row__label">Gold</span><span class="row__dots"></span><span class="row__price">35.000</span></div>
+      <div class="row"><span class="rank-dot" style="--c:var(--plat)"></span><span class="row__label">Platinum</span><span class="row__dots"></span><span class="row__price">55.000</span></div>
+      <div class="row"><span class="rank-dot" style="--c:var(--diamond)"></span><span class="row__label">Diamond</span><span class="row__dots"></span><span class="row__price">90.000</span></div>
+      <div class="row"><span class="rank-dot" style="--c:var(--ascendant)"></span><span class="row__label">Ascendant</span><span class="row__dots"></span><span class="row__price">125.000</span></div>
+      <div class="row"><span class="rank-dot" style="--c:var(--immortal)"></span><span class="row__label">Immortal 1</span><span class="row__dots"></span><span class="row__price">80.000</span></div>
+      <div class="row"><span class="rank-dot" style="--c:var(--immortal)"></span><span class="row__label">Immortal 2</span><span class="row__dots"></span><span class="row__price">120.000 <small>/win</small></span></div>
+      <div class="row"><span class="rank-dot" style="--c:var(--immortal)"></span><span class="row__label">Immortal 3</span><span class="row__dots"></span><span class="row__price">150.000 <small>/win</small></span></div>
+      <div class="row"><span class="rank-dot" style="--c:var(--radiant)"></span><span class="row__label">Radiant</span><span class="row__dots"></span><span class="row__price">PM</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__head"><b>Saver Bundle</b><span class="card__note">paket hemat</span></div>
+    <div class="card__body">
+      <div class="row"><span class="range-chip"><span class="rank-dot" style="--c:var(--iron)"></span><span class="range-line" style="--g:linear-gradient(90deg,var(--iron),var(--bronze))"></span><span class="rank-dot" style="--c:var(--bronze)"></span></span><span class="row__label">Iron 1 → Bronze 1</span><span class="row__dots"></span><span class="row__price">15.000</span></div>
+      <div class="row"><span class="range-chip"><span class="rank-dot" style="--c:var(--bronze)"></span><span class="range-line" style="--g:linear-gradient(90deg,var(--bronze),var(--silver))"></span><span class="rank-dot" style="--c:var(--silver)"></span></span><span class="row__label">Bronze 1 → Silver 1</span><span class="row__dots"></span><span class="row__price">45.000</span></div>
+      <div class="row"><span class="range-chip"><span class="rank-dot" style="--c:var(--silver)"></span><span class="range-line" style="--g:linear-gradient(90deg,var(--silver),var(--gold-r))"></span><span class="rank-dot" style="--c:var(--gold-r)"></span></span><span class="row__label">Silver 1 → Gold 1</span><span class="row__dots"></span><span class="row__price">70.000</span></div>
+      <div class="row"><span class="range-chip"><span class="rank-dot" style="--c:var(--gold-r)"></span><span class="range-line" style="--g:linear-gradient(90deg,var(--gold-r),var(--plat))"></span><span class="rank-dot" style="--c:var(--plat)"></span></span><span class="row__label">Gold 1 → Platinum 1</span><span class="row__dots"></span><span class="row__price">100.000</span></div>
+      <div class="row"><span class="range-chip"><span class="rank-dot" style="--c:var(--plat)"></span><span class="range-line" style="--g:linear-gradient(90deg,var(--plat),var(--diamond))"></span><span class="rank-dot" style="--c:var(--diamond)"></span></span><span class="row__label">Platinum 1 → Diamond 1</span><span class="row__dots"></span><span class="row__price">150.000</span></div>
+      <div class="row"><span class="range-chip"><span class="rank-dot" style="--c:var(--diamond)"></span><span class="range-line" style="--g:linear-gradient(90deg,var(--diamond),var(--ascendant))"></span><span class="rank-dot" style="--c:var(--ascendant)"></span></span><span class="row__label">Diamond 1 → Ascendant 1</span><span class="row__dots"></span><span class="row__price">250.000</span></div>
+      <div class="row"><span class="range-chip"><span class="rank-dot" style="--c:var(--ascendant)"></span><span class="range-line" style="--g:linear-gradient(90deg,var(--ascendant),var(--immortal))"></span><span class="rank-dot" style="--c:var(--immortal)"></span></span><span class="row__label">Ascendant 1 → Immortal 1</span><span class="row__dots"></span><span class="row__price">350.000</span></div>
+	  <div class="row"><span class="range-chip"><span class="rank-dot" style="--c:var(--immortal)"></span><span class="range-line" style="--g:linear-gradient(90deg,var(--immortal),var(--immortal))"></span><span class="rank-dot" style="--c:var(--immortal)"></span></span><span class="row__label">Immortal 1 → Immortal 3</span><span class="row__dots"></span><span class="row__price">450.000</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__head"><b>Win Boost</b><span class="card__note">jasa joki gendong · per win</span></div>
+    <div class="card__body">
+      <div class="row"><span class="row__label">Iron / Bronze / Silver</span><span class="row__dots"></span><span class="row__price">10.000</span></div>
+      <div class="row"><span class="row__label">Gold</span><span class="row__dots"></span><span class="row__price">20.000</span></div>
+      <div class="row"><span class="row__label">Platinum</span><span class="row__dots"></span><span class="row__price">25.000</span></div>
+      <div class="row"><span class="row__label">Diamond</span><span class="row__dots"></span><span class="row__price">30.000</span></div>
+      <div class="row"><span class="row__label">Ascendant</span><span class="row__dots"></span><span class="row__price">35.000</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__head"><b>Battle Pass &amp; Level</b></div>
+    <div class="card__body">
+      <div class="row"><span class="row__label">1 Level Battle Pass</span><span class="row__dots"></span><span class="row__price">8.000</span></div>
+      <div class="row"><span class="row__label">1 – 50 Level</span><span class="row__dots"></span><span class="row__price">400.000</span></div>
+      <div class="row"><span class="row__label">1 Level Rank</span><span class="row__dots"></span><span class="row__price">10.000</span></div>
+      <div class="row"><span class="row__label">1 – 20 Level Rank</span><span class="row__dots"></span><span class="row__price">200.000</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__head"><b>Payment</b></div>
+    <div class="chips">
+      <span class="chip">DANA</span>
+      <span class="chip">GOPAY</span>
+      <span class="chip">BCA</span>
+    </div>
+  </div>
+
+  <div class="contact">
+    <div class="contact__row">
+      <div>
+        <div class="contact__label">Discord</div>
+        <div class="contact__handle">deadman_1123</div>
+      </div>
+      <span class="contact__cta">DM TO ORDER</span>
+    </div>
+    <p class="contact__note">Minat langsung DM aja yaa &lt;3 — <b>diskon berlaku kalo order 3x+</b></p>
+  </div>
+
+</div>
+</body>
+</html>

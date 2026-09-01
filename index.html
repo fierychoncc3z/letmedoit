@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LETMEDOIT — Pricelist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B1218;
+    --panel:#121B24;
+    --panel-2:#0E161D;
+    --line:#223140;
+    --line-2:#16222E;
+    --accent:#FF4655;
+    --accent-2:#16A34A;
+    --paper:#ECE8E1;
+    --steel:#7C8A96;
+    --gold:#D4AF37;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--ink);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px),
+      radial-gradient(900px 500px at 80% -10%, rgba(255,70,85,0.10), transparent 60%),
+      radial-gradient(700px 500px at 10% 110%, rgba(22,163,74,0.10), transparent 60%);
+    color:var(--paper);
+    font-family:'Rajdhani',sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:28px 16px;
+    min-height:100%;
+  }
+
+  .shell{
+    width:100%;
+    max-width:760px;
+  }
+
+  /* ---- header ---- */
+  .brief{
+    position:relative;
+    overflow:hidden;
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:22px 22px 20px;
+    margin-bottom:18px;
+  }
+  .brief::before{
+    content:"";
+    position:absolute;
+    top:-40px; right:-60px;
+    width:220px; height:140px;
+    background:linear-gradient(135deg, var(--accent), #7A0F1E);
+    transform:rotate(18deg);
+    opacity:0.9;
+  }
+  .brief::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(11,18,24,0) 40%, var(--panel) 100%);
+  }
+  .brief__top{
+    position:relative; z-index:2;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.08em; color:var(--steel);
+    margin-bottom:14px;
+  }
+  .brief__badge{
+    background:var(--accent); color:#160306;
+    font-weight:700; padding:3px 8px;
+    letter-spacing:.06em;
+  }
+  .brief__title{
+    position:relative; z-index:2;
+    margin:0; line-height:.92;
+    font-weight:700; font-size:46px;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+  }
+  .brief__title em{ font-style:normal; color:var(--accent); }
+  .brief__tag{
+    position:relative; z-index:2;
+    margin:6px 0 0; color:var(--steel);
+    font-size:15px; font-weight:600;
+    text-transform:uppercase; letter-spacing:.04em;
+  }
+
+  /* ---- pick prompt ---- */
+  .prompt{
+    display:flex; align-items:center; gap:12px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.12em;
+    color:var(--steel); text-transform:uppercase;
+    margin:4px 2px 14px;
+  }
+  .prompt .line{ flex:1; height:1px; background:var(--line); }
+  .prompt .pulse{
+    width:8px; height:8px; background:var(--accent);
+    transform:rotate(45deg);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:.35; }
+    50%{ opacity:1; }
+  }
+
+  /* ---- choice grid ---- */
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  @media (max-width:560px){
+    .grid{ grid-template-columns:1fr; }
+  }
+
+  .choice{
+    position:relative;
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    padding:26px 22px 22px;
+    overflow:hidden;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .choice::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0; height:3px;
+    background:var(--c);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .25s ease;
+  }
+  .choice::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(420px 220px at 100% 0%, var(--cglow), transparent 70%);
+    opacity:0;
+    transition:opacity .25s ease;
+    pointer-events:none;
+  }
+  .choice:hover{
+    transform:translateY(-2px);
+    border-color:var(--c);
+  }
+  .choice:hover::before{ transform:scaleX(1); }
+  .choice:hover::after{ opacity:1; }
+  .choice:focus-visible{
+    outline:2px solid var(--c);
+    outline-offset:2px;
+  }
+
+  .choice__top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    margin-bottom:22px;
+  }
+  .choice__flag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.1em;
+    color:var(--steel); text-transform:uppercase;
+  }
+  .choice__iso{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; font-weight:700;
+    letter-spacing:.06em;
+    color:var(--c);
+    border:1px solid var(--c);
+    padding:3px 8px;
+  }
+  .choice__name{
+    margin:0;
+    font-weight:700; font-size:40px;
+    line-height:.95; text-transform:uppercase;
+    letter-spacing:.01em;
+  }
+  .choice__sub{
+    margin:6px 0 18px;
+    color:var(--steel); font-size:14px; font-weight:600;
+    text-transform:uppercase; letter-spacing:.04em;
+  }
+  .choice__chips{
+    display:flex; flex-wrap:wrap; gap:6px;
+    margin-bottom:20px;
+  }
+  .choice__chips span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:.05em;
+    color:var(--paper);
+    border:1px solid var(--line);
+    padding:4px 9px;
+  }
+  .choice__cta{
+    display:flex; align-items:center; justify-content:space-between;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; letter-spacing:.08em;
+    color:var(--paper); text-transform:uppercase;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+  .choice__cta b{ color:var(--c); font-weight:700; }
+  .choice__arrow{
+    display:inline-block;
+    transition:transform .2s ease;
+  }
+  .choice:hover .choice__arrow{ transform:translateX(5px); }
+
+  .choice--idr{ --c:var(--accent);  --cglow:rgba(255,70,85,0.16); }
+  .choice--usdt{ --c:var(--accent-2); --cglow:rgba(22,163,74,0.16); }
+
+  /* ---- contact strip ---- */
+  .contact{
+    margin-top:18px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    padding:16px 18px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    flex-wrap:wrap;
+  }
+  .contact__label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:.1em; color:var(--steel); text-transform:uppercase;
+  }
+  .contact__handle{
+    font-weight:700; font-size:22px; letter-spacing:.01em;
+    margin-top:2px;
+  }
+  .contact__cta{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; color:var(--accent); border:1px solid var(--accent);
+    padding:6px 12px; white-space:nowrap;
+  }
+  .contact__note{
+    width:100%; margin:10px 0 0; font-size:13px; color:var(--steel);
+  }
+  .contact__note b{ color:var(--gold); font-weight:700; }
+
+  @media (max-width:420px){
+    .brief__title{ font-size:38px; }
+    .choice__name{ font-size:34px; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="brief">
+    <div class="brief__top">
+      <span>// OPERATOR DOSSIER</span>
+      <span class="brief__badge">PRICELIST</span>
+    </div>
+    <h1 class="brief__title">LETME<em>DOIT</em></h1>
+    <p class="brief__tag">Valorant Rank Boosting &amp; Joki Service</p>
+  </div>
+
+  <div class="prompt">
+    <span class="pulse"></span>
+    <span>Pilih Mata Uang / Select Currency</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="grid">
+    <a class="choice choice--idr" href="pricelist_indonesia.html">
+      <div class="choice__top">
+        <span class="choice__flag">ID / Indonesia</span>
+        <span class="choice__iso">IDR</span>
+      </div>
+      <h2 class="choice__name">Rupiah</h2>
+      <p class="choice__sub">Bayar pakai e-wallet &amp; bank lokal</p>
+      <div class="choice__chips">
+        <span>DANA</span><span>GOPAY</span><span>BCA</span>
+      </div>
+      <div class="choice__cta">
+        <span>Lihat Harga <b>IDR</b></span>
+        <span class="choice__arrow">&rarr;</span>
+      </div>
+    </a>
+
+    <a class="choice choice--usdt" href="pricelist_usdt.html">
+      <div class="choice__top">
+        <span class="choice__flag">Global / Crypto</span>
+        <span class="choice__iso">USDT</span>
+      </div>
+      <h2 class="choice__name">USDT</h2>
+      <p class="choice__sub">Pay with crypto &amp; PayPal</p>
+      <div class="choice__chips">
+        <span>TRC20</span><span>BEP20</span><span>BINANCE</span><span>PAYPAL</span>
+      </div>
+      <div class="choice__cta">
+        <span>View <b>USDT</b> Prices</span>
+        <span class="choice__arrow">&rarr;</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="contact">
+    <div>
+      <div class="contact__label">Discord</div>
+      <div class="contact__handle">deadman_1123</div>
+    </div>
+    <span class="contact__cta">DM TO ORDER</span>
+    <p class="contact__note">Minat langsung DM aja yaa &lt;3 — <b>diskon berlaku kalo order 3x+</b></p>
+  </div>
+
+</div>
+</body>
+</html>
