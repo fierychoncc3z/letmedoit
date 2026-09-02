@@ -221,6 +221,53 @@
   .choice--idr{ --c:var(--accent);  --cglow:rgba(255,70,85,0.16); }
   .choice--usdt{ --c:var(--accent-2); --cglow:rgba(22,163,74,0.16); }
 
+  /* ---- QRIS card ---- */
+  .qris-card{
+    margin-top:14px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:18px;
+  }
+  .qris-card__head{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.1em;
+    color:var(--steel); text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .qris-card__badge{
+    background:var(--accent); color:#160306;
+    font-weight:700; padding:3px 8px;
+    letter-spacing:.06em;
+  }
+  .qris-card__body{
+    display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;
+  }
+  .qris-card__img{
+    width:200px; max-width:100%; height:auto;
+    display:block;
+    border:1px solid var(--line);
+    background:#fff;
+  }
+  .qris-card__info{ flex:1; min-width:200px; }
+  .qris-card__info p{
+    margin:0 0 10px; font-size:14px; color:var(--paper); font-weight:600;
+  }
+  .qris-card__chips{
+    display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;
+  }
+  .qris-card__chips span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:.05em;
+    color:var(--paper);
+    border:1px solid var(--line);
+    padding:4px 9px;
+  }
+  .qris-card__note{
+    margin:0; font-size:13px; color:var(--steel);
+  }
+  .qris-card__note b{ color:var(--accent-2); font-weight:700; }
+
   /* ---- contact strip ---- */
   .contact{
     margin-top:18px;
@@ -307,13 +354,29 @@
     </a>
   </div>
 
+  <div class="qris-card">
+    <div class="qris-card__head">
+      <span>// PEMBAYARAN LOKAL</span>
+      <span class="qris-card__badge">QRIS</span>
+    </div>
+    <div class="qris-card__body">
+      <img src="qris.png" alt="QRIS — Scan untuk pembayaran" class="qris-card__img">
+      <div class="qris-card__info">
+        <p>Scan QR di samping pake aplikasi e-wallet / m-banking apapun yang support QRIS.</p>
+        <div class="qris-card__chips">
+          <span>DANA</span><span>GOPAY</span><span>OVO</span><span>SHOPEEPAY</span><span>SEMUA BANK</span>
+        </div>
+        <p class="qris-card__note">Dari luar Indonesia? <b>USDT / PayPal</b> — cek pricelist USDT.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="contact">
     <div>
       <div class="contact__label">Discord</div>
-      <div class="contact__handle">beichuan_2</div>
+      <div class="contact__handle">deadman_1123</div>
     </div>
-    <span class="contact__cta"><a href="https://discord.com/users/734105737671868508" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">DM TO ORDER</a></span>
-    <p class="contact__note">Minat langsung DM aja yaa &lt;3 — <b>diskon berlaku kalo order 3x+</b></p>
+    <span class="contact__cta"><a href="https://discord.com/users/344048753453563904" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">DM TO ORDER</a></span>
   </div>
 
 </div>
