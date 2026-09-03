@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LETMEDOIT — Scan to Pay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B1218;
+    --panel:#121B24;
+    --line:#223140;
+    --accent:#FF4655;
+    --accent-2:#16A34A;
+    --paper:#ECE8E1;
+    --steel:#7C8A96;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--ink);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px),
+      radial-gradient(900px 500px at 80% -10%, rgba(255,70,85,0.10), transparent 60%);
+    color:var(--paper);
+    font-family:'Rajdhani',sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px 16px;
+    min-height:100%;
+  }
+
+  .head{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.12em;
+    color:var(--steel); text-transform:uppercase;
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:14px;
+  }
+  .head .badge{
+    background:var(--accent); color:#160306;
+    font-weight:700; padding:3px 8px; letter-spacing:.06em;
+  }
+
+  .qr-wrap{
+    background:#fff;
+    border:1px solid var(--line);
+    box-shadow:0 0 60px rgba(255,70,85,0.15);
+    /* QR digedein maksimal: hampir seluruh layar */
+    width:min(88vw, 80vh, 760px);
+    padding:2%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .qr-wrap img{
+    width:100%; height:auto; display:block;
+  }
+
+  .emph{
+    margin:16px 0 10px;
+    font-size:20px; font-weight:700; text-align:center; line-height:1.4;
+    max-width:560px;
+  }
+  .emph b{ color:var(--accent); }
+
+  .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:.12em;
+    color:var(--steel); text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .chips{
+    display:flex; flex-wrap:wrap; gap:6px; justify-content:center;
+    max-width:620px; margin-bottom:12px;
+  }
+  .chips span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:.05em;
+    color:var(--paper);
+    border:1px solid var(--line);
+    padding:4px 9px;
+  }
+  .note{
+    font-size:14px; color:var(--steel); text-align:center;
+    margin:4px 0 18px;
+  }
+  .note b{ color:var(--accent-2); font-weight:700; }
+
+  .back{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.08em;
+    color:var(--accent); border:1px solid var(--accent);
+    padding:8px 16px; text-decoration:none; text-transform:uppercase;
+  }
+  .back:hover{ background:rgba(255,70,85,0.12); }
+
+  @media (max-width:480px){
+    .emph{ font-size:17px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="head">
+    <span>// SCAN TO PAY</span>
+    <span class="badge">QRIS</span>
+  </div>
+
+  <div class="qr-wrap">
+    <img src="qris.png" alt="QRIS — Scan to pay">
+  </div>
+
+  <p class="emph"><b>Try scanning this QR</b> to check whether your payment app is supported.</p>
+
+  <div class="label">Confirmed supported</div>
+  <div class="chips">
+    <span>ALIPAY</span><span>WECHAT PAY</span><span>DANA</span><span>GOPAY</span><span>OVO</span><span>SHOPEEPAY</span><span>PROMPTPAY</span><span>DUITNOW</span><span>PAYNOW</span><span>ALL INDONESIAN BANKS</span>
+  </div>
+
+  <p class="note">Can't pay with QR? <b>USDT / PayPal</b> — check the USDT pricelist.</p>
+
+  <a class="back" href="index.html">&larr; BACK TO PRICELIST</a>
+
+</body>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</html>
