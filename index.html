@@ -253,6 +253,16 @@
   .qris-card__info p{
     margin:0 0 10px; font-size:14px; color:var(--paper); font-weight:600;
   }
+  .qris-card__emph{
+    margin:0 0 14px; font-size:17px; font-weight:700; line-height:1.45;
+  }
+  .qris-card__emph b{ color:var(--accent); }
+  .qris-card__label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:.12em;
+    color:var(--steel); text-transform:uppercase;
+    margin-bottom:8px;
+  }
   .qris-card__chips{
     display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;
   }
@@ -362,8 +372,12 @@
     <div class="qris-card__body">
       <img src="qris.png" alt="QRIS — Scan for payment" class="qris-card__img">
       <div class="qris-card__info">
-        <p><b>Scan this QR</b> with your payment app — accepted via <b>Alipay, WeChat Pay, PromptPay, DuitNow, PayNow</b> &amp; all QRIS-supported wallets.</p>
-        <p class="qris-card__note" style="margin-top:10px;">Can't pay with QR? <b>USDT / PayPal</b> — check the USDT pricelist.</p>
+        <p class="qris-card__emph"><b>Try scanning this QR</b> to check whether your payment app is supported.</p>
+        <div class="qris-card__label">Confirmed supported</div>
+        <div class="qris-card__chips">
+          <span>ALIPAY</span><span>WECHAT PAY</span><span>DANA</span><span>GOPAY</span><span>OVO</span><span>SHOPEEPAY</span><span>PROMPTPAY</span><span>DUITNOW</span><span>PAYNOW</span><span>ALL INDONESIAN BANKS</span>
+        </div>
+        <p class="qris-card__note" style="margin-top:12px;">Can't pay with QR? <b>USDT / PayPal</b> — check the USDT pricelist.</p>
       </div>
     </div>
   </div>
