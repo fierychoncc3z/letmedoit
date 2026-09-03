@@ -277,6 +277,10 @@
     margin:0; font-size:13px; color:var(--steel);
   }
   .qris-card__note b{ color:var(--accent-2); font-weight:700; }
+  @keyframes clickpulse{
+    0%,100%{ transform:translateX(-50%) scale(1); opacity:1; }
+    50%{ transform:translateX(-50%) scale(1.08); opacity:.85; }
+  }
 
   /* ---- contact strip ---- */
   .contact{
@@ -370,7 +374,10 @@
       <span class="qris-card__badge">QRIS</span>
     </div>
     <div class="qris-card__body">
-      <a href="qris.html" target="_blank" rel="noopener" title="Open full-size QR"><img src="qris.png" alt="QRIS — Scan for payment" class="qris-card__img"></a>
+      <a href="qris.html" target="_blank" rel="noopener" title="Open full-size QR" style="position:relative; display:block;">
+        <img src="qris.png" alt="QRIS — Scan for payment" class="qris-card__img">
+        <span style="position:absolute; bottom:10px; left:50%; transform:translateX(-50%); background:#FF4655; color:#160306; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; letter-spacing:.08em; padding:6px 12px; white-space:nowrap; animation:clickpulse 1.2s ease-in-out infinite;">👆 CLICK ME — FULL SIZE</span>
+      </a>
       <div class="qris-card__info">
         <p class="qris-card__emph"><b>Try scanning this QR</b> to check whether your payment app is supported.</p>
         <div class="qris-card__label">Confirmed supported</div>
